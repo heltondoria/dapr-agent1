@@ -400,6 +400,8 @@ dependencies = [
     { name = "dependency-injector" },
     { name = "fastapi" },
     { name = "pydantic" },
+    { name = "python-dotenv" },
+    { name = "pyyaml" },
     { name = "structlog" },
 ]
 
@@ -424,6 +426,8 @@ requires-dist = [
     { name = "dependency-injector", specifier = ">=4.48.2" },
     { name = "fastapi", specifier = ">=0.123.0" },
     { name = "pydantic", specifier = ">=2.12.5" },
+    { name = "python-dotenv", specifier = ">=1.2.1" },
+    { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "structlog", specifier = ">=25.5.0" },
 ]
 

@@ -1,0 +1,36 @@
+id: fellowship
+name: The Fellowship Workflow
+description: "A workflow to coordinate agents in a collaborative mission"
+
+objective: |
+  The team of agents must work together to accomplish complex tasks that require
+  coordination, strategy, and complementary skills. Each agent has unique capabilities
+  and the orchestrator should guide them to:
+  - Plan and coordinate actions effectively
+  - Leverage each agent's strengths
+  - Make strategic decisions at critical moments
+  - Support each other when facing challenges
+  - Maintain focus on the overall mission objective
+
+metadata:
+  version: "1.0.0"
+  tags:
+    - collaboration
+    - multi-agent
+    - fantasy
+  author: "System"
+
+configuration:
+  team_name: fellowship
+  registry_store: agentregistrystore
+  pubsub_name: messagepubsub
+  broadcast_topic: fellowship.broadcast
+  workflow_state_store: workflowstatestore
+  memory_store: memorystore
+
+agents:
+  - spec_file: agents/frodo.yaml
+  - spec_file: agents/sam.yaml
+  - spec_file: agents/gandalf.yaml
+  - spec_file: agents/legolas.yaml
+

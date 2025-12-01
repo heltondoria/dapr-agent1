@@ -1,0 +1,22 @@
+# https://docs.dapr.io/developing-applications/local-development/multi-app-dapr-run/multi-app-template/#template-properties
+version: 1
+common:
+  resourcesPath: ./components
+  logLevel: info
+  appLogDestination: console
+  daprdLogDestination: console
+
+apps:
+# Processo 1: Orquestrador LLM
+# Coordena os agentes, cria planos e roteia tarefas
+- appID: Orchestrator
+  appDirPath: .
+  command: ["python", "-m", "dapr_agent_1.orchestrator", "--workflow", "fellowship"]
+  appPort: 8004
+
+# Processo 2: Dynamic Agent Worker
+# Processa tarefas de todos os agentes dinâmicos
+- appID: AgentWorker
+  appDirPath: .
+  command: ["python", "-m", "dapr_agent_1.worker", "--workflow", "fellowship"]
+  appPort: 8005
