@@ -1,0 +1,116 @@
+[project]
+name = "dapr-agent-1"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Helton Dória", email = "helton.doria@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "dapr-agents>=0.10.3",
+    "dapr-ext-fastapi>=1.16.0",
+    "dapr-ext-workflow>=1.16.0",
+    "dependency-injector>=4.48.2",
+    "fastapi>=0.123.0",
+    "pydantic>=2.12.5",
+    "structlog>=25.5.0",
+]
+
+[project.scripts]
+dapr-agent-1 = "dapr_agent_1:main"
+
+[build-system]
+requires = ["uv_build>=0.9.13,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "codespell>=2.4.1", # a tool for finding and fixing common misspellings in text files
+    "mypy>=1.19.0", # a static type checker for Python
+    "pyright>=1.1.407", # a static type checker for Python
+    "pytest>=9.0.1", # a testing framework for Python
+    "pytest-cov>=7.0.0", # a plugin for pytest that generates coverage reports
+    "radon>=5.1.0", # a tool for measuring code complexity and performance
+    "ruff>=0.14.7", # a fast, opinionated Python code formatter
+    "vulture>=2.14", # open-source tool designed to find unused or "dead" code in Python 
+    "wily>=1.25.0", # a tool for measuring code complexity and performance
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "W",   # pycodestyle warnings
+    "I",   # isort (imports)
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "A",   # flake8-builtins
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+    "N",   # pep8-naming
+    "S",   # flake8-bandit (security)
+    "RUF", # regras do Ruff
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*" = ['S101']
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-q -ra --strict-markers --disable-warnings --maxfail=1 --cov --cov-report=term-missing"
+testpaths = ["tests"]
+xfail_strict = true
+
+[tool.coverage.run]
+branch = true
+source = ["."]
+omit = [
+    "tests/*",
+    ".venv/*",
+]
+
+[tool.coverage.report]
+precision = 2
+exclude_also = [
+    "if TYPE_CHECKING:",
+    "if __name__ == '__main__':",
+    "pragma: no cover",
+    "raise NotImplementedError",
+]
+
+[tool.codespell]
+skip = ".git,.venv,uv.lock"
+check-filenames = true
+check-hidden = true
+ignore-words-list = "crate,fo,nd"
+
+[tool.vulture]
+paths = ["."]
+min_confidence = 90
+exclude = [".venv", "tests"]
+
+[tool.wily]
+path = "."
+extensions = [".py"]
+exclude = [".venv", "tests"]
+archiver = "git"
+
+
+[tool.pyright]
+pythonVersion = "3.14"
+typeCheckingMode = "standard"
+reportMissingImports = "information"
+reportMissingTypeStubs = "none"
+include = ["."]
+exclude = ["**/.venv/**", "**/tests/**"]
